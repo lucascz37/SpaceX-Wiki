@@ -1,0 +1,26 @@
+.crew-list {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 5px;
+  background-color: #6c757d;
+}
+
+.crew-card {
+  width: 240px;
+  height: 450px;
+}
+
+.crew-image {
+  max-height: 300px;
+}
+
+@media (max-width: 900px) {
+  .crew-list {
+    flex-direction: column;
+  }
+
+  .crew-card {
+    margin-top: 8% !important;
+  }
+}

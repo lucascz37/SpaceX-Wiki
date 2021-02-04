@@ -1,0 +1,49 @@
+.logo {
+  height: 32px;
+  margin: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.menu-item {
+  padding: 0 calc(50% - 32px / 2) !important;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.site-layout {
+  background: #6c757d !important;
+}
+
+.page-title {
+  padding-top: 0.5%;
+}
+
+.footer {
+  background: #6c757d !important;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination li {
+  background-color: transparent;
+}
+
+.pagination li button {
+  background-color: transparent !important;
+}
+
+@media (max-width: 800px) {
+  .page-title {
+    padding-top: 3.5%;
+    font-size: 34px !important;
+  }
+}
