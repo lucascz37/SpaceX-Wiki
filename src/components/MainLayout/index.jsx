@@ -1,13 +1,30 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Layout, Menu, Pagination, Typography } from 'antd';
 import { HomeOutlined, IdcardOutlined, RocketOutlined } from '@ant-design/icons';
 import Logo from '../../assets/satellite.svg';
 import './style.css';
 
+const items = [
+  { key: '1', label: 'Company', path: '/', icon: <HomeOutlined style={{ fontSize: '32px' }} /> },
+  { key: '2', label: 'Crew', path: '/crew', icon: <IdcardOutlined style={{ fontSize: '32px' }} /> },
+  {
+    key: '3',
+    label: 'Rockets',
+    path: '/rockets',
+    icon: <RocketOutlined style={{ fontSize: '32px' }} />,
+  },
+];
+
 export default function MainLayout({ children, totalPages, currentPage, contentClassName }) {
-  const [getCollapsed, setCollapsed] = useState(true);
-  const [getLiStyle, setLiStyle] = useState('menu-item');
+  const history = useHistory();
+  const location = useLocation();
+  const [getCollapsed, setCollapsed] = useState(
+    location.state === undefined ? true : location.state.collapsed,
+  );
+  const [getLiStyle, setLiStyle] = useState(getCollapsed ? 'menu-item' : '');
+  const currentKey = items.find((_item) => location.pathname === _item.path).key;
 
   useEffect(() => {
     setLiStyle(getCollapsed ? 'menu-item' : '');
@@ -17,37 +34,32 @@ export default function MainLayout({ children, totalPages, currentPage, contentC
     setCollapsed(!getCollapsed);
   }
 
+  function changePage(redirect) {
+    history.push({
+      pathname: redirect,
+      state: { collapsed: getCollapsed },
+    });
+  }
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Layout.Sider theme="light" collapsible collapsed={getCollapsed} onCollapse={collapsed}>
         <div className="logo">
           <img src={Logo} alt="Logo" />
         </div>
-        <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
-          <Menu.Item
-            className={getLiStyle}
-            key="1"
-            icon={<HomeOutlined style={{ fontSize: '32px' }} />}
-          >
-            Company
-          </Menu.Item>
-          <Menu.Item
-            className={getLiStyle}
-            key="2"
-            icon={<IdcardOutlined style={{ fontSize: '32px' }} />}
-          >
-            Crew
-          </Menu.Item>
-          <Menu.Item
-            className={getLiStyle}
-            key="3"
-            icon={<RocketOutlined style={{ fontSize: '32px' }} />}
-          >
-            Launches
-          </Menu.Item>
+        <Menu theme="light" selectedKeys={[currentKey]} mode="inline">
+          {items.map((item) => (
+            <Menu.Item
+              className={getLiStyle}
+              key={item.key}
+              icon={item.icon}
+              onClick={() => changePage(item.path)}
+            >
+              {item.label}
+            </Menu.Item>
+          ))}
         </Menu>
       </Layout.Sider>
-
       <Layout className="site-layout">
         <Layout.Header style={{ padding: '0', background: '#FFF' }} className="header">
           <Typography.Title className="page-title">SpaceX Wiki</Typography.Title>

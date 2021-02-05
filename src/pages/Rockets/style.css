@@ -1,4 +1,4 @@
-.crew-list {
+.rocket-list {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -7,21 +7,30 @@
   overflow: hidden;
 }
 
-.crew-card {
+.rocket-card {
   width: 240px;
   height: 450px;
 }
 
-.crew-image {
+.rocket-image {
   height: 300px;
 }
 
+.active-status {
+  display: flex;
+  align-items: center;
+}
+
+.active-status span {
+  margin-left: 2%;
+}
+
 @media (max-width: 900px) {
-  .crew-list {
+  .rocket-list {
     flex-direction: column;
   }
 
-  .crew-card {
+  .rocket-card {
     margin-top: 8% !important;
   }
 }

@@ -6,7 +6,7 @@ import { getCrew } from '../../api';
 
 import './style.css';
 
-export default function Company() {
+export default function Crew() {
   const [getCurrentPage, setCurrentPage] = useState(1);
   const [getContent, setContent] = useState(null);
   const [getTotalPages, setTotalPages] = useState(null);
@@ -35,6 +35,7 @@ export default function Company() {
             hoverable
             cover={<img alt="astronaut" src={crewMember.image} className="crew-image" />}
             className="crew-card"
+            key={crewMember.id}
           >
             <Card.Meta title={crewMember.name} description={crewMember.agency} />
           </Card>
